@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>67 ONLINE - The Legendary Meme</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #ff0066;
+            --secondary-color: #00ffff;
+            --dark-bg: #0a0a14;
+            --darker-bg: #050508;
+            --text-color: #f0f0f0;
+            --accent-color: #67ff67;
+        }
+
+        body {
+            font-family: 'Roboto Mono', monospace;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(5, 5, 8, 0.95);
+            border-bottom: 3px solid var(--primary-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(255, 0, 102, 0.2);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px rgba(255, 0, 102, 0.7);
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(255, 0, 102, 0.5);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: all 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+            background-color: rgba(255, 0, 102, 0.1);
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 100px 0;
+            background: linear-gradient(rgba(10, 10, 20, 0.9), rgba(5, 5, 8, 0.95)), 
+                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            border-bottom: 5px solid var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "67";
+            position: absolute;
+            font-size: 30vw;
+            font-weight: 900;
+            color: rgba(255, 0, 102, 0.05);
+            z-index: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px var(--primary-color);
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #cccccc;
+        }
+
+        .counter-container {
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 3px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 30px;
+            display: inline-block;
+            margin-top: 30px;
+            box-shadow: 0 0 30px rgba(255, 0, 102, 0.5);
+        }
+
+        .counter-label {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+
+        .counter {
+            font-size: 5rem;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-color);
+            text-shadow: 0 0 15px var(--accent-color);
+            letter-spacing: 5px;
+        }
+
+        /* Main Content */
+        .section {
+            padding: 100px 0;
+            border-bottom: 1px solid rgba(255, 0, 102, 0.2);
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 60px;
+            text-align: center;
+            color: var(--secondary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 5px;
+            background-color: var(--primary-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+
+        .meme-origin {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 80px;
+        }
+
+        .meme-text {
+            flex: 1;
+        }
+
+        .meme-text h3 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .meme-text p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .meme-visual {
+            flex: 1;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 3px solid var(--secondary-color);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+        }
+
+        .meme-number {
+            font-size: 10rem;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary-color);
+            text-shadow: 0 0 30px var(--primary-color);
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .meme-caption {
+            font-size: 2rem;
+            color: var(--accent-color);
+        }
+
+        /* Stats Section */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .stat-box {
+            background-color: rgba(5, 5, 8, 0.8);
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 0, 102, 0.3);
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.3rem;
+            color: #cccccc;
+        }
+
+        /* Interactive Section */
+        .interactive-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 60px;
+        }
+
+        .online-simulator {
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 3px solid var(--secondary-color);
+            border-radius: 10px;
+            padding: 40px;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .simulator-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--secondary-color);
+        }
+
+        .simulator-display {
+            background-color: #000;
+            border: 2px solid var(--accent-color);
+            border-radius: 5px;
+            padding: 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            text-align: left;
+            margin-bottom: 30px;
+            min-height: 150px;
+            overflow-y: auto;
+        }
+
+        .simulator-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff3385;
+            box-shadow: 0 0 20px rgba(255, 0, 102, 0.7);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--dark-bg);
+        }
+
+        .btn-secondary:hover {
+            background-color: #33ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+            color: var(--dark-bg);
+        }
+
+        .btn-accent:hover {
+            background-color: #99ff99;
+            box-shadow: 0 0 20px rgba(103, 255, 103, 0.7);
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 60px;
+        }
+
+        .gallery-item {
+            background-color: rgba(5, 5, 8, 0.8);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .gallery-item:hover {
+            border-color: var(--primary-color);
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px rgba(255, 0, 102, 0.3);
+        }
+
+        .gallery-icon {
+            font-size: 4rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .gallery-text {
+            font-size: 1.5rem;
+            color: var(--text-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--darker-bg);
+            padding: 60px 0 30px;
+            text-align: center;
+            border-top: 3px solid var(--primary-color);
+        }
+
+        .footer-content {
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .footer-text {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: #aaaaaa;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .social-icon {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #777777;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { text-shadow: 0 0 10px var(--primary-color); }
+            50% { text-shadow: 0 0 25px var(--primary-color); }
+            100% { text-shadow: 0 0 10px var(--primary-color); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .meme-origin {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .counter {
+                font-size: 4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .simulator-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .logo-text {
+                font-size: 1.8rem;
+            }
+            
+            .hero {
+                padding: 70px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .counter {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon">67</div>
+                <div class="logo-text">ONLINE</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#origin">Origin</a></li>
+                    <li><a href="#stats">Stats</a></li>
+                    <li><a href="#interactive">Simulator</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1 class="pulse">67 IS ONLINE</h1>
+            <p>The legendary meme that took the internet by storm. Witness the phenomenon of the user who was always online, creating one of Destiny's most iconic moments.</p>
+            
+            <div class="counter-container float">
+                <div class="counter-label">67 HAS BEEN ONLINE FOR</div>
+                <div class="counter" id="online-counter">00:00:00:00</div>
+                <div class="counter-label">DAYS : HOURS : MINUTES : SECONDS</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Origin Section -->
+    <section class="section" id="origin">
+        <div class="container">
+            <h2 class="section-title">THE ORIGIN OF 67</h2>
+            
+            <div class="meme-origin">
+                <div class="meme-text">
+                    <h3>How "67 Online" Became a Legend</h3>
+                    <p>The "67 online" meme originated from a livestream by Destiny (Steven Kenneth Bonnell II), a popular political streamer and commentator.</p>
+                    <p>During one of his streams, Destiny noticed a viewer with the username "67" who appeared to be constantly watching his stream, regardless of the time of day or night.</p>
+                    <p>Destiny began commenting on how "67" was always online, leading to chat joining in on the joke. The meme evolved into a community in-joke about this perpetually online viewer.</p>
+                    <p>The phrase "67 online" became shorthand for someone who spends an excessive amount of time on the internet or in streaming communities.</p>
+                    <p>Over time, "67" transformed from a specific username into a symbolic representation of the always-online viewer in streaming culture.</p>
+                </div>
+                
+                <div class="meme-visual">
+                    <div class="meme-number">67</div>
+                    <div class="meme-caption">IS ALWAYS ONLINE</div>
+                    <p style="margin-top: 20px;">The number that represents eternal online presence in streaming culture</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section" id="stats">
+        <div class="container">
+            <h2 class="section-title">67 BY THE NUMBERS</h2>
+            
+            <div class="stats-container">
+                <div class="stat-box">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-number" id="hours-watched">8,760</div>
+                    <div class="stat-label">HOURS WATCHED</div>
+                </div>
+                
+                <div class="stat-box">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="stat-number" id="days-online">365</div>
+                    <div class="stat-label">DAYS ONLINE</div>
+                </div>
+                
+                <div class="stat-box">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-number" id="mentions">10,000+</div>
+                    <div class="stat-label">MEME MENTIONS</div>
+                </div>
+                
+                <div class="stat-box">
+                    <div class="stat-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="stat-number" id="caffeine">5,840</div>
+                    <div class="stat-label">CUPS OF COFFEE</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Section -->
+    <section class="section" id="interactive">
+        <div class="container">
+            <h2 class="section-title">67 ONLINE SIMULATOR</h2>
+            
+            <div class="interactive-container">
+                <div class="online-simulator">
+                    <h3 class="simulator-title">BECOME 67</h3>
+                    <div class="simulator-display" id="simulator-output">
+                        > System initialized...<br>
+                        > Loading 67 protocol...<br>
+                        > Connection established.<br>
+                        > 67 is now ONLINE.
+                    </div>
+                    
+                    <div class="simulator-controls">
+                        <button class="btn btn-primary" id="go-online">GO ONLINE</button>
+                        <button class="btn btn-secondary" id="watch-stream">WATCH STREAM</button>
+                        <button class="btn btn-accent" id="never-logoff">NEVER LOG OFF</button>
+                        <button class="btn btn-primary" id="reset-sim">RESET SIMULATOR</button>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; max-width: 800px; margin-top: 30px;">
+                    <h3 style="color: var(--secondary-color); margin-bottom: 20px;">Experience what it's like to be 67</h3>
+                    <p>Click the buttons to simulate the legendary online presence of 67. Watch as the simulator tracks your "online" activity just like the original 67.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="section" id="gallery">
+        <div class="container">
+            <h2 class="section-title">67 MEME GALLERY</h2>
+            
+            <div class="gallery">
+                <div class="gallery-item">
+                    <div class="gallery-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <div class="gallery-text">The Eternal Viewer</div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <div class="gallery-text">Infinite Online Presence</div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-icon">
+                        <i class="fas fa-stream"></i>
+                    </div>
+                    <div class="gallery-text">Streaming Legend</div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-icon">
+                        <i class="fas fa-user-clock"></i>
+                    </div>
+                    <div class="gallery-text">24/7 Availability</div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-icon">
+                        <i class="fas fa-meteor"></i>
+                    </div>
+                    <div class="gallery-text">Phenomenon Status</div>
+                </div>
+                
+                <div class="gallery-item">
+                    <div class="gallery-icon">
+                        <i class="fas fa-ghost"></i>
+                    </div>
+                    <div class="gallery-text">Digital Ghost</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">67 ONLINE</div>
+                <p class="footer-text">The definitive website dedicated to the legendary "67 online" meme. Celebrating the perpetually online viewer that became a streaming culture icon.</p>
+                
+                <div class="social-icons">
+                    <a href="#" class="social-icon"><i class="fab fa-twitch"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-reddit"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 67 ONLINE MEME ARCHIVE. This site is a tribute to the meme. All rights to the original content belong to their respective owners.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Online counter
+        const counterElement = document.getElementById('online-counter');
+        const startDate = new Date('2022-01-01T00:00:00'); // 67 has been online since this date
+        
+        function updateCounter() {
+            const now = new Date();
+            const diff = now - startDate;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            counterElement.textContent = 
+                `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Update stats
+            document.getElementById('hours-watched').textContent = Math.floor(days * 24 + hours + minutes/60).toLocaleString();
+            document.getElementById('days-online').textContent = days;
+            document.getElementById('caffeine').textContent = Math.floor(days * 16).toLocaleString();
+        }
+        
+        // Update counter every second
+        setInterval(updateCounter, 1000);
+        updateCounter(); // Initial call
+        
+        // Simulator functionality
+        const simulatorOutput = document.getElementById('simulator-output');
+        const goOnlineBtn = document.getElementById('go-online');
+        const watchStreamBtn = document.getElementById('watch-stream');
+        const neverLogoffBtn = document.getElementById('never-logoff');
+        const resetSimBtn = document.getElementById('reset-sim');
+        
+        let onlineTime = 0;
+        let streamCount = 0;
+        let isOnline = false;
+        
+        function addSimulatorMessage(message) {
+            const timestamp = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            simulatorOutput.innerHTML += `<br>> [${timestamp}] ${message}`;
+            simulatorOutput.scrollTop = simulatorOutput.scrollHeight;
+        }
+        
+        goOnlineBtn.addEventListener('click', function() {
+            if (!isOnline) {
+                isOnline = true;
+                addSimulatorMessage("67 is now ONLINE. Connection established.");
+                this.textContent = "GOING OFFLINE";
+                this.classList.remove('btn-primary');
+                this.classList.add('btn-accent');
+            } else {
+                isOnline = false;
+                addSimulatorMessage("67 is now OFFLINE. Connection terminated.");
+                this.textContent = "GO ONLINE";
+                this.classList.remove('btn-accent');
+                this.classList.add('btn-primary');
+            }
+        });
+        
+        watchStreamBtn.addEventListener('click', function() {
+            if (!isOnline) {
+                addSimulatorMessage("Error: Cannot watch stream while offline. Please go online first.");
+                return;
+            }
+            
+            streamCount++;
+            onlineTime += 2;
+            addSimulatorMessage(`Watching Destiny stream... Total streams watched: ${streamCount}`);
+            addSimulatorMessage(`Estimated online time: ${onlineTime} hours`);
+            
+            // Update mentions stat
+            const mentionsElement = document.getElementById('mentions');
+            let currentMentions = parseInt(mentionsElement.textContent.replace(/,/g, ''));
+            if (!isNaN(currentMentions)) {
+                currentMentions += 5;
+                mentionsElement.textContent = currentMentions.toLocaleString() + "+";
+            }
+        });
+        
+        neverLogoffBtn.addEventListener('click', function() {
+            if (!isOnline) {
+                addSimulatorMessage("Error: Cannot enable never-logoff mode while offline.");
+                return;
+            }
+            
+            addSimulatorMessage("Activating NEVER-LOGOFF protocol...");
+            addSimulatorMessage("System override engaged. 67 will remain online indefinitely.");
+            addSimulatorMessage("Warning: This action cannot be undone.");
+            
+            // Change background color to indicate never-logoff mode
+            document.querySelector('.online-simulator').style.boxShadow = '0 0 40px rgba(103, 255, 103, 0.7)';
+            document.querySelector('.online-simulator').style.borderColor = 'var(--accent-color)';
+            
+            // Disable the go offline button
+            goOnlineBtn.disabled = true;
+        });
+        
+        resetSimBtn.addEventListener('click', function() {
+            simulatorOutput.innerHTML = "> System initialized...<br>> Loading 67 protocol...<br>> Connection established.<br>> 67 is now ONLINE.";
+            isOnline = false;
+            onlineTime = 0;
+            streamCount = 0;
+            
+            // Reset buttons
+            goOnlineBtn.textContent = "GO ONLINE";
+            goOnlineBtn.classList.remove('btn-accent');
+            goOnlineBtn.classList.add('btn-primary');
+            goOnlineBtn.disabled = false;
+            
+            // Reset simulator appearance
+            document.querySelector('.online-simulator').style.boxShadow = '';
+            document.querySelector('.online-simulator').style.borderColor = 'var(--secondary-color)';
+            
+            addSimulatorMessage("Simulator reset to initial state.");
+        });
+        
+        // Add some random simulator events
+        setInterval(() => {
+            if (isOnline && Math.random() > 0.7) {
+                const events = [
+                    "67 is still watching...",
+                    "67 has been online for an impressive duration.",
+                    "Destiny mentions 67 in stream.",
+                    "Chat is asking about 67's online status.",
+                    "67 continues the eternal watch."
+                ];
+                addSimulatorMessage(events[Math.floor(Math.random() * events.length)]);
+            }
+        }, 10000);
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Add floating effect to stat boxes on mouse move
+        document.addEventListener('mousemove', function(e) {
+            const statBoxes = document.querySelectorAll('.stat-box');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            statBoxes.forEach((box, index) => {
+                const offsetX = (mouseX - 0.5) * 20;
+                const offsetY = (mouseY - 0.5) * 20;
+                const delay = index * 0.1;
+                
+                box.style.transform = `translate(${offsetX}px, ${offsetY - 10}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
